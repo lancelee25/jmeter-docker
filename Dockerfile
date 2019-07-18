@@ -22,8 +22,9 @@ RUN    apk update \
 	&& curl -L --silent ${JMETER_DOWNLOAD_URL} >  /tmp/dependencies/apache-jmeter-${JMETER_VERSION}.tgz  \
 	&& mkdir -p /opt  \
 	&& tar -xzf /tmp/dependencies/apache-jmeter-${JMETER_VERSION}.tgz -C /opt  \
-	&& rm -rf /tmp/dependencies
-	&& sed -i "s/^#server.rmi.ssl.disable=false/server.rmi.ssl.disable=true/g" $JMETER_BIN/jmeter.properties
+	&& rm -rf /tmp/dependencies \
+	&& sed -i "s/^#server.rmi.ssl.disable=false/server.rmi.ssl.disable=true/g" $JMETER_BIN/jmeter.properties \
+	&& sed -i "s/^#server.rmi.localport=4000/server.rmi.localport=1099/g" $JMETER_BIN/jmeter.properties 
 
 # TODO: plugins (later)
 # && unzip -oq "/tmp/dependencies/JMeterPlugins-*.zip" -d $JMETER_HOME
